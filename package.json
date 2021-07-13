@@ -1,0 +1,25 @@
+{
+  "name": "bot_university",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/bot.js",
+    "postinstall": "npm run tsc",
+    "dev": "nodemon -e ts --exec \"npm run build && npm start\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.10.0",
+    "dotenv": "^8.2.0",
+    "jest": "^27.0.3",
+    "nodemon": "^2.0.4",
+    "typescript": "^4.0.2"
+  }
+}
