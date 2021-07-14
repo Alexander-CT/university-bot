@@ -11,7 +11,7 @@ import { build, test } from "./functions/funciones.js";
 import { ALL } from "dns";
 import { timeStamp } from "console";
 import { saludar } from "./functions/saludar";
-
+// import { testeo } from "./functions/tests";
 
 const bot: Client = new Client();
 
@@ -46,6 +46,7 @@ bot.on("message", async (message: Message): Promise<void> => {
             break;
         case crearCurso.name:
             crearCurso.action(message);
+            // console.log(testeo);
             break;
         case 'list':
             build(message);
