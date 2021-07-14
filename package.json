@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/bot.js",
-    "postinstall": "npm run tsc",
+    "postinstall": "npm run build",
     "dev": "nodemon -e ts --exec \"npm run build && npm start\""
   },
   "keywords": [],
