@@ -22,10 +22,30 @@ let crearCurso: command = {
                 command === crearCurso.name
             ){
                 let nombre_curso = args[0].toString();
+                
+                let everyoneRole = await message.guild.roles.everyone;
+                
+                let courseRole = await message.guild.roles.create({
+                    data: {
+                        name: nombre_curso,
+                    },
+                    reason: `Rol del curso ${nombre_curso}`
+                });
+                
                 let new_category: CategoryChannel = await message.guild.channels
                     .create(nombre_curso, {
                         type: 'category',
-                        reason: 'Nueva categoria para curso'
+                        reason: 'Nueva categoria para curso',
+                        permissionOverwrites: [
+                            {
+                                id: courseRole.id,
+                                allow: ['VIEW_CHANNEL','SEND_MESSAGES','CONNECT','SPEAK']
+                            },
+                            {
+                                id: everyoneRole.id,
+                                deny: ['VIEW_CHANNEL','SEND_MESSAGES','CONNECT','SPEAK']
+                            }
+                        ]
                     });
 
                 const CATEGORY_ID: string = new_category.id;
@@ -34,14 +54,8 @@ let crearCurso: command = {
                     .create(nombre_curso, {
                         type: 'text',
                         parent: CATEGORY_ID,
-                        // permissionOverwrites: [
-                        //     {
-                        //         id: args[1],
-                        //         allow: ['SEND_MESSAGES']
-                        //     }
-                        // ],
                         topic: `Canal para el curso ${nombre_curso}`,
-                        reason: 'Nuevo canal para estudio'
+                        reason: 'Nuevo canal para estudio',
                     });
 
                 let new_cmd: TextChannel = await message.guild.channels
