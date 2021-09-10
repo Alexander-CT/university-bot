@@ -182,9 +182,8 @@ async function construction(message: Message) {
     }
 }
 
-function argumentos(message: Message) {
-    const args: User | Role | String[] | Message = message.content.slice(prefix.length).trim().split(' ');
-    return args;
+function argumentos(message: Message): Array<string> {
+    return message.content.slice(prefix.length).trim().split(/ +/);
 }
 
 
