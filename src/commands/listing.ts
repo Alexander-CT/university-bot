@@ -16,10 +16,14 @@ export let listar: command = {
         try {
             let args: Array<string> = argumentos(message);
             let command: string = args.shift()?.toLowerCase() || '';
+            let prefijo: string = message.content.slice(0,prefix.length);
             if (
+                prefijo === prefix &&
+                listar.name.includes(command) &&
                 message.guild &&
                 message.member &&
-                message.member.hasPermission(listar.permission)
+                message.member.hasPermission(listar.permission) &&
+                listar.interaction
             ) {
                 let listedChannels: Array<String>=[];
                 let channel_list: Collection<string, GuildChannel> = message.guild.channels.cache;
@@ -28,9 +32,6 @@ export let listar: command = {
                     listedChannels.push(channel.name);
                 });
                 message.channel.send(`Tienes acceso a: ${listedChannels.join(',')}`);
-            }
-            if(message.member?.hasPermission(['SEND_MESSAGES'])!) {
-                message.reply('No tienes permiso para hacer esto');
             }
         } catch (error) {
             console.log(error);
